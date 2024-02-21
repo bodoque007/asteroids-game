@@ -11,7 +11,7 @@ Game::Game() : ship(WIDTH/2, HEIGHT/2), projectilesToRemove(), asteroidsToRemove
     window.create(sf::VideoMode(WIDTH, HEIGHT), "Hello, SFML!");
     window.setFramerateLimit(60);
     // Initialize the asteroids vector with a certain number of asteroids
-    for (int i = 0; i < 5; ++i) {
+    for (int i = 0; i < 9; ++i) {
         float x = static_cast<float>(rand() % (window.getSize().x / 3));
         float y = static_cast<float>(rand() % (window.getSize().y / 3));
 
