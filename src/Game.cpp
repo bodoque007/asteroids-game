@@ -69,11 +69,24 @@ void Game::update() {
         projectiles.end()
     );
 
-    for (const auto& asteroid : asteroids) {
+    for (auto& asteroid : asteroids) {
         for (const auto& projectile : projectiles) {
             if (asteroidProjectileCollision(asteroid, projectile)) {
-                asteroidsToRemove.push_back(asteroid);
                 projectilesToRemove.push_back(projectile);
+                asteroidsToRemove.push_back(asteroid);
+                if (!(asteroid.getRadius() < 20.f)) {
+                    float offsetX = static_cast<float>(std::rand() % 30 - 15);  // Random offset between -15 and 15
+                    float offsetY = static_cast<float>(std::rand() % 30 - 15);
+
+                    Asteroid newAsteroid1(asteroid.getPosition().x + offsetX, asteroid.getPosition().y + offsetY, asteroid.getRadius() / 2, 6);
+                    // New random offset for the other half asteroid.
+                    offsetX = static_cast<float>(std::rand() % 30 - 15);
+                    offsetY = static_cast<float>(std::rand() % 30 - 15);
+                    Asteroid newAsteroid2(asteroid.getPosition().x + offsetX, asteroid.getPosition().y + offsetY, asteroid.getRadius() / 2, 6);
+
+                    newAsteroids.push_back(newAsteroid1);
+                    newAsteroids.push_back(newAsteroid2);
+                }
             }
         }
     }
@@ -100,13 +113,20 @@ void Game::update() {
 
     for (auto& asteroid : asteroids) {
         asteroid.update();
-
         // Check collision with ship
         if (ship.getBounds().intersects(asteroid.getBounds())) {
             std::cout << "Ship collided with asteroid!" << std::endl;
             gameOver = true;
         }
-    }   
+    }
+
+    for(auto& asteroid : newAsteroids) {
+        asteroids.push_back(asteroid);
+    }
+    // Optimization purposes, clear vectors for next iteration, as they were already removed from the asteroids and projectiles vectors.
+    newAsteroids.clear();
+    asteroidsToRemove.clear();
+    projectilesToRemove.clear();
 }
 
 void Game::render() {

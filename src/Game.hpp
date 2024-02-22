@@ -26,5 +26,6 @@ private:
     std::vector<Asteroid> asteroids;  // Vector to store multiple asteroids
     std::vector<Projectile> projectilesToRemove;
     std::vector<Asteroid> asteroidsToRemove;
+    std::vector<Asteroid> newAsteroids;
     bool gameOver;
 };

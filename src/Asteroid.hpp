@@ -10,7 +10,8 @@ public:
 
     sf::FloatRect getBounds() const;
     bool operator==(const Asteroid& other) const;
-
+    float getRadius();
+    sf::Vector2f getPosition();
 
 private:
     sf::CircleShape shape;

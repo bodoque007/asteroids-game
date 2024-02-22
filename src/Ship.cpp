@@ -34,8 +34,8 @@ void Ship::accelerate() {
     float changeX = std::cos(shipShape.getRotation() * 3.14159265 / 180.0f);
     float changeY = std::sin(shipShape.getRotation() * 3.14159265 / 180.0f);
 
-    changeX *= 0.25f;
-    changeY *= 0.25f;
+    changeX *= 0.05f;
+    changeY *= 0.05f;
     this->speed.x += changeX;
     this->speed.y += changeY;
 }
@@ -47,11 +47,11 @@ void Ship::render(sf::RenderWindow& window) const {
 }
 
 void Ship::rotateLeft() {
-    shipShape.rotate(-5.f);  // Adjust the rotation speed as needed
+    shipShape.rotate(-7.f);
 }
 
 void Ship::rotateRight() {
-    shipShape.rotate(5.f);  // Adjust the rotation speed as needed
+    shipShape.rotate(7.f);
 }
 
 sf::Vector2f Ship::getPosition() {

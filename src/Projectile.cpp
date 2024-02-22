@@ -3,7 +3,7 @@
 
 
 Projectile::Projectile(float x, float y, float rotation) {
-    projectileShape.setSize(sf::Vector2f(20.0f, 10.0f));
+    projectileShape.setSize(sf::Vector2f(10.0f, 10.0f));
     float offset = 1.0f; // Adjust this value as needed
     projectileShape.setPosition(x + offset * std::cos(rotation * 3.14159265 / 180.0f),
                       y + offset * std::sin(rotation * 3.14159265 / 180.0f));

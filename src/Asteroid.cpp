@@ -7,12 +7,10 @@ Asteroid::Asteroid(float x, float y, float radius, int numSides) {
     shape.setPointCount(numSides);
     shape.setFillColor(sf::Color::Yellow);
 
-    // Set the initial velocity (you may adjust this based on your needs)
-    float speed = 2.0f;
+    float speed = 0.8f;
     velocity.x = speed;
     velocity.y = speed;
     rotationalMovement = 0.5f - static_cast<float>(rand()) / (RAND_MAX / 1.0f);
-
 }
 
 
@@ -48,4 +46,12 @@ bool Asteroid::operator==(const Asteroid& other) const {
     const float epsilon = 0.00001f;
     return std::abs(this->shape.getPosition().x - other.shape.getPosition().x) < epsilon &&
            std::abs(this->shape.getPosition().y - other.shape.getPosition().y) < epsilon;
+}
+
+float Asteroid::getRadius() {
+    return this->shape.getRadius();
+}
+
+sf::Vector2f Asteroid::getPosition() {
+    return this->shape.getPosition();
 }
