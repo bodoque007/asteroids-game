@@ -2,7 +2,7 @@
 
 ## Overview
 A simple Asteroids game (not fully implemented yet) implemented in C++ using the SFML library.
-![Gameplay](https://github.com/bodoque007/asteroids-game/assets/63447579/e1d77245-8551-46b2-98b1-d59127d8b6da)
+![Gameplay screenshot](https://github.com/bodoque007/asteroids-game/assets/63447579/4cd65a31-9093-47be-be6a-64a193e4ff29)
 
 ## Getting Started
 ### Prerequisites
