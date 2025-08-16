@@ -1,5 +1,3 @@
-// Game.cpp
-
 #include "Game.hpp"
 #include <iostream>
 using namespace std;
@@ -8,7 +6,7 @@ static const int WIDTH = 800;
 static const int HEIGHT = 600;
 
 Game::Game() : ship(WIDTH/2, HEIGHT/2), projectilesToRemove(), asteroidsToRemove(), gameOver(false) {
-    window.create(sf::VideoMode(WIDTH, HEIGHT), "Hello, SFML!");
+    window.create(sf::VideoMode(WIDTH, HEIGHT), "Asteroids-ish");
     window.setFramerateLimit(60);
     // Initialize the asteroids vector with a certain number of asteroids
     for (int i = 0; i < 9; ++i) {
@@ -38,27 +36,33 @@ void Game::handleEvents() {
             if (event.type == sf::Event::Closed) {
                 window.close();
             }
-            // Handle keyboard events
-            if (event.key.code == sf::Keyboard::W) {
-                ship.accelerate();
-            } else if (event.key.code == sf::Keyboard::A) {
-                ship.rotateLeft();
-            } else if (event.key.code == sf::Keyboard::D) {
-                ship.rotateRight();
-            }
-            else if (event.key.code == sf::Keyboard::L) {
-                    // Create a projectile when the Space key is pressed
+            // Handle keyboard events for one-time actions
+            if (event.type == sf::Event::KeyPressed) {
+                if (event.key.code == sf::Keyboard::L) {
+                    // Create a projectile when the L key is pressed
                     cout<<"Creating projectile"<<endl;
                     Projectile projectile(ship.getPosition().x, ship.getPosition().y, ship.getRotation());
                     projectiles.push_back(projectile);
                 }
-            else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+                else if (event.key.code == sf::Keyboard::Escape) {
                     window.close();
                 }
+            }
+        }
+        
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+            ship.accelerate();
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+            ship.rotateLeft();
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+            ship.rotateRight();
         }
 }
 
 void Game::update() {
+    ship.update();
     ship.move();
 
     projectiles.erase(
@@ -139,7 +143,7 @@ void Game::render() {
         asteroids[i].render(window);
     }
 
-    ship.render(window);  // Render the ship
+    ship.render(window);
     window.display();   
 }
 

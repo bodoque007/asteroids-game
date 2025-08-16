@@ -1,5 +1,3 @@
-// Ship.hpp
-
 #pragma once
 #include <SFML/Graphics.hpp>
 
@@ -16,6 +14,10 @@ public:
     float getRotation();
     sf::FloatRect getBounds() const;
 private:
-    sf::RectangleShape shipShape;
+    sf::ConvexShape shipShape;
     sf::Vector2f speed;
+    static constexpr float MAX_SPEED = 6.0f;
+    static constexpr float FRICTION = 0.98f;
+    static constexpr float ACCELERATION = 0.2f;
+    static constexpr float ROTATION_SPEED = 3.0f;
 };

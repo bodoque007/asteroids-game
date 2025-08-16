@@ -1,19 +1,28 @@
-// Ship.cpp
-
 #include "Ship.hpp"
 #include <cmath>
 
 Ship::Ship(float x, float y) {
-    // Ship-specific initialization logic
-
     speed = sf::Vector2f(0.f, 0.f);
-    shipShape.setSize(sf::Vector2f(20, 40));  // Set the size of the rectangle
+    
+    // Create a triangle shape
+    shipShape.setPointCount(3);
+    shipShape.setPoint(0, sf::Vector2f(0, -20));   // Top point (nose of the ship)
+    shipShape.setPoint(1, sf::Vector2f(-10, 20));  // Bottom left
+    shipShape.setPoint(2, sf::Vector2f(10, 20));   // Bottom right
+    
     shipShape.setFillColor(sf::Color::White);
     shipShape.setPosition(400.0f, 300.0f);  // Set the initial position
+    
+    // Set the origin to the center of the triangle for proper rotation
+    shipShape.setOrigin(0, 0);
+}
+
+void Ship::update() {
+    speed.x *= FRICTION;
+    speed.y *= FRICTION;
 }
 
 void Ship::move() {
-    // Ship-specific update logic
     shipShape.move(speed);
     sf::Vector2f position = shipShape.getPosition();
     if (position.x > 800.0f) {
@@ -31,27 +40,36 @@ void Ship::move() {
 }
 
 void Ship::accelerate() {
-    float changeX = std::cos(shipShape.getRotation() * 3.14159265 / 180.0f);
-    float changeY = std::sin(shipShape.getRotation() * 3.14159265 / 180.0f);
+    // Subtract 90 degrees to align with triangle's upward-pointing nose
+    float angle = (shipShape.getRotation() - 90.0f) * 3.14159265 / 180.0f;
+    float changeX = std::cos(angle);
+    float changeY = std::sin(angle);
 
-    changeX *= 0.05f;
-    changeY *= 0.05f;
+    changeX *= ACCELERATION;
+    changeY *= ACCELERATION;
+    
     this->speed.x += changeX;
     this->speed.y += changeY;
+    
+    // Limit maximum speed
+    float currentSpeed = std::sqrt(speed.x * speed.x + speed.y * speed.y);
+    if (currentSpeed > MAX_SPEED) {
+        speed.x = (speed.x / currentSpeed) * MAX_SPEED;
+        speed.y = (speed.y / currentSpeed) * MAX_SPEED;
+    }
 }
 
 
 void Ship::render(sf::RenderWindow& window) const {
-    // Ship-specific rendering logic
     window.draw(shipShape);
 }
 
 void Ship::rotateLeft() {
-    shipShape.rotate(-7.f);
+    shipShape.rotate(-ROTATION_SPEED);
 }
 
 void Ship::rotateRight() {
-    shipShape.rotate(7.f);
+    shipShape.rotate(ROTATION_SPEED);
 }
 
 sf::Vector2f Ship::getPosition() {

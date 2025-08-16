@@ -4,16 +4,19 @@
 
 Projectile::Projectile(float x, float y, float rotation) {
     projectileShape.setSize(sf::Vector2f(10.0f, 10.0f));
-    float offset = 1.0f; // Adjust this value as needed
-    projectileShape.setPosition(x + offset * std::cos(rotation * 3.14159265 / 180.0f),
-                      y + offset * std::sin(rotation * 3.14159265 / 180.0f));
+    
+    // Adjust angle to match ship's forward direction (subtract 90 degrees)
+    float angle = (rotation - 90.0f) * 3.14159265 / 180.0f;
+    float offset = 1.0f;
+    
+    projectileShape.setPosition(x + offset * std::cos(angle),
+                      y + offset * std::sin(angle));
 
     projectileShape.setFillColor(sf::Color::Red);
     projectileShape.setRotation(rotation);
 
-    // Calculate the initial speed based on the rotation
-    float changeX = std::cos(rotation * 3.14159265 / 180.0f);
-    float changeY = std::sin(rotation * 3.14159265 / 180.0f);
+    float changeX = std::cos(angle);
+    float changeY = std::sin(angle);
 
     speed.x = projectileSpeed * changeX;
     speed.y = projectileSpeed * changeY;
@@ -41,7 +44,6 @@ sf::FloatRect Projectile::getBounds() const {
 }
 
 bool Projectile::operator==(const Projectile& other) const {
-    // Adjust the epsilon value based on your precision requirements
     const float epsilon = 0.00001f;
     return std::abs(this->projectileShape.getPosition().x - other.projectileShape.getPosition().x) < epsilon &&
            std::abs(this->projectileShape.getPosition().y - other.projectileShape.getPosition().y) < epsilon;

@@ -1,5 +1,3 @@
-// main.cpp
-
 #include "Game.hpp"
 
 int main() {
