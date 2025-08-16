@@ -14,6 +14,6 @@ public:
 
 private:
     sf::RectangleShape projectileShape;
-    sf::Vector2f speed;
+    sf::Vector2f velocity;
     float projectileSpeed = 5.0f;
 };

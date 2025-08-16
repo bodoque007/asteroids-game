@@ -18,8 +18,8 @@ Projectile::Projectile(float x, float y, float rotation) {
     float changeX = std::cos(angle);
     float changeY = std::sin(angle);
 
-    speed.x = projectileSpeed * changeX;
-    speed.y = projectileSpeed * changeY;
+    velocity.x = projectileSpeed * changeX;
+    velocity.y = projectileSpeed * changeY;
 }
 
 void Projectile::render(sf::RenderWindow& window) const {
@@ -28,7 +28,7 @@ void Projectile::render(sf::RenderWindow& window) const {
 
 
 void Projectile::update() {
-    projectileShape.move(speed);
+    projectileShape.move(velocity);
 }
 
 bool Projectile::isOffScreen() const {
