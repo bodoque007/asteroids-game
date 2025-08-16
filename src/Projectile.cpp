@@ -9,8 +9,8 @@ Projectile::Projectile(float x, float y, float rotation) {
     float angle = (rotation - 90.0f) * 3.14159265 / 180.0f;
     float offset = 1.0f;
     
-    projectileShape.setPosition(x + offset * std::cos(angle),
-                      y + offset * std::sin(angle));
+    projectileShape.setPosition(x + offset,
+                      y + offset);
 
     projectileShape.setFillColor(sf::Color::Red);
     projectileShape.setRotation(rotation);
