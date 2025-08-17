@@ -1,3 +1,0 @@
-/home/sebastiansarco/Desktop/asteroids-game/build/CMakeFiles/Asteroides.dir
-/home/sebastiansarco/Desktop/asteroids-game/build/CMakeFiles/edit_cache.dir
-/home/sebastiansarco/Desktop/asteroids-game/build/CMakeFiles/rebuild_cache.dir
