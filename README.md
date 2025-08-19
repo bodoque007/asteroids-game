@@ -1,10 +1,10 @@
 # Asteroids Game
-
+TODO: Make it cross-platform, just to learn how to do so lol.
 ## Overview
 A simple Asteroids game (not fully implemented yet) implemented in C++ using the SFML library.
 ![Gameplay screenshot](https://github.com/user-attachments/assets/f43beabd-7945-43a5-9554-24c7ba1e53a2)
 
-## Getting Started
+## Getting Started (Linux only)
 ### Prerequisites
 Before you begin, make sure you have the following dependencies installed on your system:
 
