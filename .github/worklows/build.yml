@@ -1,0 +1,39 @@
+name: Simple C++ CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout repository and submodules
+        uses: actions/checkout@v3
+        with:
+          submodules: "recursive"
+
+      - name: Activate vcpkg
+        uses: microsoft/vcpkg-action@v2
+        with:
+          vcpkgDirectory: "${{ github.workspace }}/vcpkg"
+          runVcpkgInstall: true
+
+      - name: Configure CMake
+        run: cmake --preset=default
+
+      - name: Build
+        run: cmake --build --preset=default
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: asteroids-${{ matrix.os }}
+          path: build/
