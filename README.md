@@ -1,32 +1,58 @@
-# Asteroids Game
-TODO: Make it cross-platform, just to learn how to do so lol.
 ## Overview
-A simple Asteroids game (not fully implemented yet) implemented in C++ using the SFML library.
+
+A simple Asteroids game (not fully implemented yet) implemented in C++ using the SFML library.  
+Made mostly to learn a little bit about game programming and how to make C++ code run cross-platform.
+
 ![Gameplay screenshot](https://github.com/user-attachments/assets/f43beabd-7945-43a5-9554-24c7ba1e53a2)
 
-## Getting Started (Linux only)
+---
+
+## Getting Started
+
 ### Prerequisites
-Before you begin, make sure you have the following dependencies installed on your system:
 
+Before you begin, make sure you have the following dependencies installed:
+
+- [CMake](https://cmake.org/download/)
 - [SFML](https://www.sfml-dev.org/download.php)
+- A C++ compiler:
+  - **Linux:** GCC / Clang
+  - **Windows:** MinGW-w64 or MSVC
 
-### Installation
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/bodoque007/Asteroids.git
-   ```
-2. Navigate to the project directory
-    ```bash
-    cd Asteroids
-    ```
-3. Run the following commands in order to make the executable
-    ```bash
-    mkdir build
-    cd build
-    cmake ..
-    cmake --build .
-    ```
-4. Run the game with
-    ```bash
-    ./Asteroids
-    ```
+---
+
+bash
+bash
+bash
+
+### Building on Linux
+
+1. Clone the repository and build:
+
+```bash
+git clone https://github.com/bodoque007/Asteroids.git
+cd Asteroids
+mkdir build
+cd build
+cmake ..
+cmake --build .
+./Asteroides
+```
+
+---
+
+### Building on Windows (MinGW)
+
+1. Clone the repository and build:
+
+```cmd
+git clone https://github.com/bodoque007/Asteroids.git
+cd Asteroids
+mkdir build
+cd build
+cmake -G "MinGW Makefiles" ..
+cmake --build . --config Release
+Asteroides.exe
+```
+
+> **Note:** Make sure the SFML `.dll` files are in the same folder as the executable, otherwise the game will fail to launch.
