@@ -1,5 +1,5 @@
 #include "Asteroid.hpp"
-
+#include <cmath>
 
 Asteroid::Asteroid(float x, float y, float radius, int numSides) {
     shape.setRadius(radius);
@@ -44,8 +44,8 @@ sf::FloatRect Asteroid::getBounds() const {
 }
 bool Asteroid::operator==(const Asteroid& other) const {
     const float epsilon = 0.00001f;
-    return std::abs(this->shape.getPosition().x - other.shape.getPosition().x) < epsilon &&
-           std::abs(this->shape.getPosition().y - other.shape.getPosition().y) < epsilon;
+    return std::fabs(this->shape.getPosition().x - other.shape.getPosition().x) < epsilon &&
+           std::fabs(this->shape.getPosition().y - other.shape.getPosition().y) < epsilon;
 }
 
 float Asteroid::getRadius() {
